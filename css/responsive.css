@@ -1,0 +1,145 @@
+/* Tablets y dispositivos medianos */
+@media (max-width: 768px) {
+    .header .container {
+        flex-wrap: wrap;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav {
+        display: none;
+        width: 100%;
+        order: 3;
+    }
+
+    .nav.active {
+        display: block;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0;
+    }
+
+    .nav li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav a {
+        display: block;
+        padding: 1rem 0;
+    }
+
+    .carrusel {
+        height: 400px;
+    }
+
+    .carrusel-caption h2 {
+        font-size: 2rem;
+    }
+
+    .carrusel-caption p {
+        font-size: 1.2rem;
+    }
+
+    .carrusel-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carrusel-btn.prev {
+        left: 10px;
+    }
+
+    .carrusel-btn.next {
+        right: 10px;
+    }
+
+    .filtros-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section h2 {
+        font-size: 2rem;
+    }
+
+    .coches-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .servicios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .proximamente h1 {
+        font-size: 2.5rem;
+    }
+
+    .proximamente p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .logo h1 {
+        font-size: 1.4rem;
+    }
+
+    .carrusel {
+        height: 300px;
+    }
+
+    .carrusel-caption h2 {
+        font-size: 1.5rem;
+    }
+
+    .carrusel-caption p {
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 2rem 0;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    .coches-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .coche-info h3 {
+        font-size: 1.3rem;
+    }
+
+    .coche-precio {
+        font-size: 1.5rem;
+    }
+
+    .proximamente svg {
+        width: 100px;
+        height: 100px;
+    }
+
+    .proximamente h1 {
+        font-size: 2rem;
+    }
+
+    .proximamente p {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutosIKA - Coches en Venta</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel" src="js/data.js"></script>
+    <script type="text/babel" src="js/components.js"></script>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        
+        const App = () => {
+            const [paginaActual, setPaginaActual] = React.useState('venta');
+            const [filtros, setFiltros] = React.useState({tipo: 'todos', marca: 'todas', estado: 'todos'});
+            
+            return (
+                <>
+                    <Header paginaActual={paginaActual} setPagina={setPaginaActual} />
+                    <main>
+                        <section className="galeria">
+                            <div className="container">
+                                <h2>Coches en Venta</h2>
+                                <div className="coches-grid">
+                                    {cochesVenta.map(coche => (
+                                        <TarjetaCoche key={coche.id} coche={coche} />
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <Footer setPagina={setPaginaActual} />
+                </>
+            );
+        };
+        
+        root.render(<App />);
+    </script>
+</body>
+</html>

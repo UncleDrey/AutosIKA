@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutosIKA - Taxis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel" src="js/data.js"></script>
+    <script type="text/babel" src="js/components.js"></script>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        
+        const App = () => {
+            const [paginaActual, setPaginaActual] = React.useState('taxis');
+            
+            return (
+                <>
+                    <Header paginaActual={paginaActual} setPagina={setPaginaActual} />
+                    <main>
+                        <section className="proximamente">
+                            <div className="container">
+                                <svg width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                                <h1>Próximamente</h1>
+                                <p>Estamos trabajando en este servicio. ¡Vuelve pronto!</p>
+                            </div>
+                        </section>
+                    </main>
+                    <Footer setPagina={setPaginaActual} />
+                </>
+            );
+        };
+        
+        root.render(<App />);
+    </script>
+</body>
+</html>
