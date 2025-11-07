@@ -162,7 +162,7 @@ const cochesAlquiler = [
 // Imágenes del carrusel
 const carruselImagenes = [
     {
-        url: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200',
+        url: './images/yaris.jpg',
         titulo: 'Encuentra tu coche ideal',
         subtitulo: 'Venta • Alquiler • Asesoramiento'
     },
