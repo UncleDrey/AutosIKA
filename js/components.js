@@ -18,12 +18,12 @@ const Header = ({ paginaActual, setPagina }) => {
         <header className="header">
             <div className="container">
                 <div className="logo">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 17h14v-2H5v2zm0-4h14V7H5v6z"/>
-                        <path d="M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"/>
-                        <circle cx="8" cy="17" r="2"/>
-                        <circle cx="16" cy="17" r="2"/>
-                    </svg>
+                    <img 
+                        src="./images/logo/logoautosika.png" 
+                        alt="Logo Autos IKA" 
+                        className="logo-img" // Usa esta clase en tu CSS para controlar el tamaño
+                        style={{ width: '40px', height: '40px' }} // Estilos inline opcionales para tamaño inicial
+                    />
                     <h1>AutosIKA</h1>
                 </div>
                 <button className="menu-toggle" onClick={toggleMenu}>

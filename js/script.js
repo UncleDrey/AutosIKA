@@ -210,9 +210,9 @@ const PaginaNosotros = () => {
                             <circle cx="12" cy="10" r="3"/>
                         </svg>
                         <div className="ubicacion-detalles">
-                            <p><strong>Dirección:</strong> Av. Principal 123, Ciudad</p>
+                            <p><strong>Dirección:</strong> Bata, Ciudad</p>
                             <p><strong>Horario:</strong> Lunes a Sábado, 9:00 - 19:00</p>
-                            <p><strong>Teléfono:</strong> +34 123 456 789</p>
+                            <p><strong>Teléfono:</strong> +240 222 633 211</p>
                             <p><strong>Email:</strong> info@autosika.com</p>
                         </div>
                     </div>
