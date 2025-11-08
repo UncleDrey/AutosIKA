@@ -142,7 +142,13 @@ const Filtros = ({ filtros, setFiltros }) => {
 };
 
 // Componente TarjetaCoche
-const TarjetaCoche = ({ coche }) => {
+const TarjetaCoche = ({ coche, onVerMas }) => {
+    const handleVerMas = () => {
+        if (onVerMas) {
+            onVerMas(coche);
+        }
+    };
+
     return (
         <div className="coche-card">
             <img src={coche.imagen} alt={`${coche.marca} ${coche.modelo}`} />
@@ -156,7 +162,141 @@ const TarjetaCoche = ({ coche }) => {
                 <p className="coche-precio">
                     {coche.tipo === 'venta' ? `$${coche.precio.toLocaleString()}` : `$${coche.precio}/día`}
                 </p>
-                <button className="btn">Ver más</button>
+                <button className="btn" onClick={handleVerMas}>Ver más</button>
+            </div>
+        </div>
+    );
+};
+
+// Componente Modal con Carrusel de Detalles
+const ModalDetalleCoche = ({ coche, onClose }) => {
+    const [slideActual, setSlideActual] = useState(0);
+
+    useEffect(() => {
+        // Bloquear scroll del body cuando el modal está abierto
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, []);
+
+    const siguienteSlide = () => {
+        setSlideActual((prev) => (prev + 1) % coche.imagenes.length);
+    };
+
+    const anteriorSlide = () => {
+        setSlideActual((prev) => (prev - 1 + coche.imagenes.length) % coche.imagenes.length);
+    };
+
+    const irASlide = (index) => {
+        setSlideActual(index);
+    };
+
+    const handleClickFuera = (e) => {
+        if (e.target.className === 'modal-overlay') {
+            onClose();
+        }
+    };
+
+    return (
+        <div className="modal-overlay" onClick={handleClickFuera}>
+            <div className="modal-contenido">
+                <button className="modal-cerrar" onClick={onClose}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+
+                <div className="modal-grid">
+                    {/* Carrusel de imágenes */}
+                    <div className="modal-carrusel">
+                        <div className="modal-carrusel-container">
+                            {coche.imagenes.map((img, index) => (
+                                <div
+                                    key={index}
+                                    className={`modal-slide ${index === slideActual ? 'active' : ''}`}
+                                >
+                                    <img src={img} alt={`${coche.marca} ${coche.modelo} - Vista ${index + 1}`} />
+                                </div>
+                            ))}
+                        </div>
+
+                        <button className="modal-btn prev" onClick={anteriorSlide}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <button className="modal-btn next" onClick={siguienteSlide}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+
+                        {/* Thumbnails */}
+                        <div className="modal-thumbnails">
+                            {coche.imagenes.map((img, index) => (
+                                <div
+                                    key={index}
+                                    className={`thumbnail ${index === slideActual ? 'active' : ''}`}
+                                    onClick={() => irASlide(index)}
+                                >
+                                    <img src={img} alt={`Thumbnail ${index + 1}`} />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Información del coche */}
+                    <div className="modal-info">
+                        <span className="badge">{coche.tipo === 'venta' ? 'VENTA' : 'ALQUILER'}</span>
+                        <h2>{coche.marca} {coche.modelo}</h2>
+                        <p className="modal-precio">
+                            {coche.tipo === 'venta' ? `$${coche.precio.toLocaleString()}` : `$${coche.precio}/día`}
+                        </p>
+
+                        <div className="modal-detalles">
+                            <div className="detalle-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                                <span><strong>Año:</strong> {coche.año}</span>
+                            </div>
+                            <div className="detalle-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                                <span><strong>Estado:</strong> {coche.estado.charAt(0).toUpperCase() + coche.estado.slice(1)}</span>
+                            </div>
+                        </div>
+
+                        <div className="modal-descripcion">
+                            <h3>Descripción</h3>
+                            <p>{coche.descripcion}</p>
+                        </div>
+
+                        <div className="modal-caracteristicas">
+                            <h3>Características</h3>
+                            <ul>
+                                {coche.caracteristicas.map((caracteristica, index) => (
+                                    <li key={index}>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                        {caracteristica}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <button className="btn btn-contactar" onClick={onClose}>
+                            Contactar
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );
@@ -348,11 +488,12 @@ const Footer = ({ setPagina }) => {
     );
 };
 
-// Exportar componentes
+// Exportar componentes al objeto window
 window.Header = Header;
 window.Carrusel = Carrusel;
 window.Filtros = Filtros;
 window.TarjetaCoche = TarjetaCoche;
+window.ModalDetalleCoche = ModalDetalleCoche;
 window.Servicios = Servicios;
 window.Contacto = Contacto;
 window.Footer = Footer;

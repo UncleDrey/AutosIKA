@@ -3,6 +3,7 @@ const { useState, useEffect } = React;
 // Página de Inicio
 const PaginaInicio = ({ filtros, setFiltros }) => {
     const [cochesParaMostrar, setCochesParaMostrar] = useState([]);
+    const [cocheSeleccionado, setCocheSeleccionado] = useState(null);
 
     useEffect(() => {
         filtrarCoches();
@@ -26,6 +27,14 @@ const PaginaInicio = ({ filtros, setFiltros }) => {
 
     const cochesSolicitados = cochesVenta.filter(c => c.popular);
 
+    const abrirModal = (coche) => {
+        setCocheSeleccionado(coche);
+    };
+
+    const cerrarModal = () => {
+        setCocheSeleccionado(null);
+    };
+
     return (
         <>
             <Carrusel />
@@ -37,7 +46,7 @@ const PaginaInicio = ({ filtros, setFiltros }) => {
                     <div className="coches-grid">
                         {cochesParaMostrar.length > 0 ? (
                             cochesParaMostrar.map(coche => (
-                                <TarjetaCoche key={coche.id} coche={coche} />
+                                <TarjetaCoche key={coche.id} coche={coche} onVerMas={abrirModal} />
                             ))
                         ) : (
                             <p className="no-results">No se encontraron vehículos con los filtros seleccionados</p>
@@ -51,7 +60,7 @@ const PaginaInicio = ({ filtros, setFiltros }) => {
                     <h2>Coches Más Solicitados</h2>
                     <div className="coches-grid">
                         {cochesSolicitados.map(coche => (
-                            <TarjetaCoche key={coche.id} coche={coche} />
+                            <TarjetaCoche key={coche.id} coche={coche} onVerMas={abrirModal} />
                         ))}
                     </div>
                 </div>
@@ -59,28 +68,58 @@ const PaginaInicio = ({ filtros, setFiltros }) => {
 
             <Servicios />
             <Contacto />
+
+            {cocheSeleccionado && (
+                <ModalDetalleCoche coche={cocheSeleccionado} onClose={cerrarModal} />
+            )}
         </>
     );
 };
 
 // Página de Venta
 const PaginaVenta = () => {
+    const [cocheSeleccionado, setCocheSeleccionado] = useState(null);
+
+    const abrirModal = (coche) => {
+        setCocheSeleccionado(coche);
+    };
+
+    const cerrarModal = () => {
+        setCocheSeleccionado(null);
+    };
+
     return (
-        <section className="galeria">
-            <div className="container">
-                <h2>Coches en Venta</h2>
-                <div className="coches-grid">
-                    {cochesVenta.map(coche => (
-                        <TarjetaCoche key={coche.id} coche={coche} />
-                    ))}
+        <>
+            <section className="galeria">
+                <div className="container">
+                    <h2>Coches en Venta</h2>
+                    <div className="coches-grid">
+                        {cochesVenta.map(coche => (
+                            <TarjetaCoche key={coche.id} coche={coche} onVerMas={abrirModal} />
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            {cocheSeleccionado && (
+                <ModalDetalleCoche coche={cocheSeleccionado} onClose={cerrarModal} />
+            )}
+        </>
     );
 };
 
 // Página de Alquiler
 const PaginaAlquiler = () => {
+    const [cocheSeleccionado, setCocheSeleccionado] = useState(null);
+
+    const abrirModal = (coche) => {
+        setCocheSeleccionado(coche);
+    };
+
+    const cerrarModal = () => {
+        setCocheSeleccionado(null);
+    };
+
     return (
         <>
             <section className="galeria">
@@ -99,17 +138,21 @@ const PaginaAlquiler = () => {
                     </div>
                     <div className="coches-grid">
                         {cochesAlquiler.map(coche => (
-                            <TarjetaCoche key={coche.id} coche={coche} />
+                            <TarjetaCoche key={coche.id} coche={coche} onVerMas={abrirModal} />
                         ))}
                     </div>
                 </div>
             </section>
             <Contacto />
+
+            {cocheSeleccionado && (
+                <ModalDetalleCoche coche={cocheSeleccionado} onClose={cerrarModal} />
+            )}
         </>
     );
 };
 
-// Página de Taxis
+// Página de Taxis (sin cambios)
 const PaginaTaxis = () => {
     return (
         <section className="proximamente">
@@ -125,7 +168,7 @@ const PaginaTaxis = () => {
     );
 };
 
-// Página Sobre Nosotros
+// Página Sobre Nosotros (sin cambios)
 const PaginaNosotros = () => {
     return (
         <section className="sobre-nosotros">

@@ -143,3 +143,78 @@
         font-size: 1rem;
     }
 }
+
+/* Modal Responsive */
+@media (max-width: 768px) {
+    .modal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-carrusel-container {
+        height: 300px;
+    }
+
+    .modal-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .modal-btn.prev {
+        left: 10px;
+    }
+
+    .modal-btn.next {
+        right: 10px;
+    }
+
+    .modal-info {
+        padding: 30px 20px;
+    }
+
+    .modal-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .modal-precio {
+        font-size: 1.5rem;
+    }
+
+    .thumbnail {
+        width: 60px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-overlay {
+        padding: 10px;
+    }
+
+    .modal-contenido {
+        max-height: 95vh;
+    }
+
+    .modal-carrusel {
+        padding: 15px;
+    }
+
+    .modal-carrusel-container {
+        height: 250px;
+    }
+
+    .modal-thumbnails {
+        gap: 5px;
+    }
+
+    .thumbnail {
+        width: 50px;
+        height: 38px;
+    }
+
+    .modal-cerrar {
+        width: 35px;
+        height: 35px;
+        top: 10px;
+        right: 10px;
+    }
+}
