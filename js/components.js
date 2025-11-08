@@ -22,7 +22,7 @@ const Header = ({ paginaActual, setPagina }) => {
                         src="./images/logo/logoautosika.png" 
                         alt="Logo Autos IKA" 
                         className="logo-img" // Usa esta clase en tu CSS para controlar el tamaño
-                        style={{ width: '40px', height: '40px' }} // Estilos inline opcionales para tamaño inicial
+                        style={{ width: '80px', height: '80px' }} // Estilos inline opcionales para tamaño inicial
                     />
                     <h1>AutosIKA</h1>
                 </div>
